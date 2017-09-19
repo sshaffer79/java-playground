@@ -1,0 +1,36 @@
+group 'com.shaffer'
+version '0.1'
+
+buildscript {
+    repositories {
+        mavenCentral()
+        maven { url "https://plugins.gradle.org/m2/" }
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'idea'
+
+repositories {
+    mavenCentral()
+}
+
+processResources {
+    expand(project.properties)
+}
+
+
+tasks.withType(JavaCompile) {
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
+}
+
+configurations {
+    providedRuntime
+}
+
+dependencies {
+}
+task wrapper(type: Wrapper) {
+    gradleVersion = '3.5.1'
+}
