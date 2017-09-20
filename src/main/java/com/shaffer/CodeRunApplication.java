@@ -5,6 +5,7 @@ import com.shaffer.concurrency.singleton.SingletonFactory;
 import com.shaffer.concurrency.singleton.SingletonLockingFactory;
 import com.shaffer.concurrency.threading.ExecutorInvokeAll;
 import com.shaffer.concurrency.threading.ExecutorPolling;
+import com.shaffer.concurrency.threading.ExecutorScheduler;
 
 import java.util.concurrent.ExecutionException;
 
@@ -60,6 +61,22 @@ public class CodeRunApplication {
                     e.printStackTrace();
                 } finally {
                     ExecutorInvokeAll.shutdown();
+                }
+
+                break;
+            }
+
+            case "ExecutorScheduler": {
+                ExecutorScheduler.start();
+
+                try {
+                    ExecutorScheduler.run();
+                } catch (ExecutionException e) {
+                    e.printStackTrace();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                } finally {
+                    ExecutorScheduler.shutdown();
                 }
 
                 break;
