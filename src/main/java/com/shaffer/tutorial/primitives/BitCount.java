@@ -4,7 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class BitCount {
-    private static final Logger logger = LoggerFactory.getLogger( BitCount.class);
+    private static final Logger logger = LoggerFactory.getLogger(BitCount.class);
 
     public static short countBits(int value) {
         if (logger.isDebugEnabled()) {
