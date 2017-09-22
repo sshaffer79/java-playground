@@ -35,10 +35,10 @@ public class IntegerArrayQuickSortExample {
                     logger.debug("Array value is: " + value);
                 }
                 if (value < pivotValue) {
-                    if (logger.isDebugEnabled()) {
-                        logger.debug("Values have been swapped for outer [{}] and inner[{}]", outerCounter, innerCounter);
-                    }
                     if (array.get(outerCounter) > value) {
+                        if (logger.isDebugEnabled()) {
+                            logger.debug("Values are being swapped for outer [{}] and inner[{}]", outerCounter, innerCounter);
+                        }
                         Collections.swap(array, outerCounter, innerCounter);
                     }
                     break;
@@ -56,10 +56,10 @@ public class IntegerArrayQuickSortExample {
                     logger.debug("Array value is: " + value);
                 }
                 if (value > pivotValue) {
-                    if (logger.isDebugEnabled()) {
-                        logger.debug("Values have been swapped for outer [{}] and inner[{}]", outerCounter, innerCounter);
-                    }
                     if (array.get(outerCounter) > value) {
+                        if (logger.isDebugEnabled()) {
+                            logger.debug("Values are being swapped for outer [{}] and inner[{}]", outerCounter, innerCounter);
+                        }
                         Collections.swap(array, outerCounter, innerCounter);
                     }
                     break;
