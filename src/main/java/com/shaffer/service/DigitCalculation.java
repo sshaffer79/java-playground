@@ -1,12 +1,27 @@
 package com.shaffer.service;
 
 import com.shaffer.model.Digit;
+import com.shaffer.model.DigitPosition;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class DigitCalculation {
+    private static final Logger logger = LoggerFactory.getLogger(DigitCalculation.class);
 
-    public Digit getHighestDigit(int value) {
-        //TODO recursive until no more values found
-        // Look at big decimal
-        return null;
+    public static Digit getHighestDigit(int value) {
+        int depth = 0;
+        return getHighestDigit(value, 0);
+    }
+
+    public static Digit getHighestDigit(int value, int depth) {
+        if (logger.isDebugEnabled()) {
+            logger.debug("Calculating highest digit for {} with current depth of {}", value, depth);
+        }
+        if (value < 10) {
+            return new Digit(value, DigitPosition.getByDepth(depth));
+        }
+        value = value / 10;
+
+        return getHighestDigit(value, depth + 1);
     }
 }

@@ -2,6 +2,9 @@ package com.shaffer.service;
 
 import org.junit.Test;
 
+import java.math.BigDecimal;
+import java.text.DecimalFormat;
+
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
@@ -32,5 +35,13 @@ public class NumberTransformationTest {
         int value = 5237;
         String text = NumberTransformation.getTextForNumber(value);
         assertThat(text, is("Five thousand two hundred and thirty seven"));
+    }
+
+    @Test
+    public void test() {
+        BigDecimal newValue = new BigDecimal(5);
+        newValue = newValue.scaleByPowerOfTen(7);
+        DecimalFormat df = new DecimalFormat("0");
+        System.out.print(df.format(newValue.doubleValue()));
     }
 }

@@ -1,21 +1,26 @@
 package com.shaffer.model;
 
 public enum DigitPosition {
-    Single(1, 1), Tenth(2, 10), Hundreth(3, 100), Thousandth(4, 1000), Millionth(6, 1000000), Billionth(8, 1000000000);
+    Single(0), Tenth(1), Hundreth(2), Thousandth(3), TenThousandth(4), HundredThousand(5),
+    Millionth(6), TenMillionth(7), HundredMillionth(8), Billionth(9);
 
-    private int position;
-    private int multiplier;
+    private int depth;
 
-    DigitPosition(int position, int multiplier) {
-        this.position = position;
-        this.multiplier = multiplier;
+    DigitPosition(int depth) {
+        this.depth = depth;
     }
 
-    public int getPosition() {
-        return this.position;
+    public int getDepth() {
+        return this.depth;
     }
 
-    public int getMultiplier() {
-        return this.multiplier;
+    public static DigitPosition getByDepth(int depth) {
+        DigitPosition returnPosition = Single;
+        for (DigitPosition digitPosition : DigitPosition.values()) {
+          if (depth == digitPosition.getDepth()) {
+              returnPosition = digitPosition;
+          }
+        }
+        return returnPosition;
     }
 }
