@@ -1,1 +1,0 @@
-To run use java main class com.shaffer.CodeRunApplication with argument of either Singleton or SingletonLocking
