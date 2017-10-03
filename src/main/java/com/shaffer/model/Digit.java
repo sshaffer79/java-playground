@@ -37,6 +37,14 @@ public class Digit {
         this.next = next;
     }
 
+    public int size() {
+        if (getNext() != null) {
+            return 1 + getNext().size();
+        } else {
+            return 1;
+        }
+    }
+
     @Override
     public String toString() {
         final StringBuffer sb = new StringBuffer("Digit{");
