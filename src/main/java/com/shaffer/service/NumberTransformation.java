@@ -42,4 +42,29 @@ public class NumberTransformation {
         }
         return digitList;
     }
+
+    protected static Digit getRootDigit(BigDecimal value) {
+        Digit rootDigit = null;
+        Digit parentDigit = null;
+
+        while (value.intValue() > 0) {
+            logger.debug("Number being worked on is currently " + value.toPlainString());
+            Digit currentDigit = DigitCalculation.getHighestDigit(value.intValue());
+
+            BigDecimal digitalToSubtract = new BigDecimal(currentDigit.getValue())
+                    .setScale(0)
+                    .scaleByPowerOfTen(currentDigit.getDigitPosition().getDepth());
+            logger.debug("Subtracting {} from {} ", digitalToSubtract.toPlainString(), value.toPlainString());
+            value = value.subtract(digitalToSubtract);
+
+            if (rootDigit == null) {
+                rootDigit = currentDigit;
+                parentDigit = currentDigit;
+            } else {
+                parentDigit.setNext(currentDigit);
+                parentDigit = currentDigit;
+            }
+        }
+        return rootDigit;
+    }
 }
