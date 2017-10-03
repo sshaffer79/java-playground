@@ -5,10 +5,10 @@ import com.shaffer.model.DigitPosition;
 import org.junit.Test;
 
 import java.math.BigDecimal;
-import java.text.DecimalFormat;
 import java.util.List;
 
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.nullValue;
 import static org.junit.Assert.assertThat;
 
 public class NumberTransformationTest {
@@ -91,10 +91,62 @@ public class NumberTransformationTest {
     }
 
     @Test
+    public void testGetRootDigit() {
+        BigDecimal value = new BigDecimal(6).setScale(0);
+
+        Digit digit = NumberTransformation.getRootDigit(value);
+
+        assertThat(digit.size(), is(1));
+        assertThat(digit.getValue(), is(6));
+        assertThat(digit.getDigitPosition(), is(DigitPosition.Single));
+        assertThat(digit.getNext(), is(nullValue()));
+    }
+
+    @Test
+    public void testGetRootDigitByThousand() {
+        BigDecimal value = new BigDecimal(2358).setScale(0);
+
+        Digit digit = NumberTransformation.getRootDigit(value);
+
+        assertThat(digit.size(), is(4));
+        assertThat(digit.getValue(), is(2));
+        assertThat(digit.getDigitPosition(), is(DigitPosition.Thousandth));
+        assertThat(digit.getNext().getValue(), is(3));
+        assertThat(digit.getNext().getDigitPosition(), is(DigitPosition.Hundreth));
+        assertThat(digit.getNext().getNext().getValue(), is(5));
+        assertThat(digit.getNext().getNext().getDigitPosition(), is(DigitPosition.Tenth));
+        assertThat(digit.getNext().getNext().getNext().getValue(), is(8));
+        assertThat(digit.getNext().getNext().getNext().getDigitPosition(), is(DigitPosition.Single));
+    }
+
+    @Test
+    public void testGetGetRootDigitByThousandWithZeroIn() {
+        BigDecimal value = new BigDecimal(2308).setScale(0);
+
+        Digit digit = NumberTransformation.getRootDigit(value);
+
+        assertThat(digit.size(), is(3));
+        assertThat(digit.getValue(), is(2));
+        assertThat(digit.getDigitPosition(), is(DigitPosition.Thousandth));
+        assertThat(digit.getNext().getValue(), is(3));
+        assertThat(digit.getNext().getDigitPosition(), is(DigitPosition.Hundreth));
+        assertThat(digit.getNext().getNext().getValue(), is(8));
+        assertThat(digit.getNext().getNext().getDigitPosition(), is(DigitPosition.Single));
+    }
+
+    @Test
     public void test() {
-        BigDecimal newValue = new BigDecimal(5);
-        newValue = newValue.scaleByPowerOfTen(0);
-        DecimalFormat df = new DecimalFormat("0");
-        System.out.print(df.format(newValue.doubleValue()));
+        Digit digit = NumberTransformation.getRootDigit(new BigDecimal(713423534));
+
+        System.out.println(digit.toString());
+
+        Digit currentDigit = digit;
+        StringBuilder stringBuilder = new StringBuilder();
+        while (currentDigit != null) {
+            stringBuilder.append(currentDigit.getValue()).append(" ");
+            currentDigit = currentDigit.getNext();
+        }
+        System.out.println(stringBuilder.toString());
+        System.out.println(digit.size());
     }
 }
