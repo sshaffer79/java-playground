@@ -18,7 +18,8 @@ public class DigitCalculation {
             logger.debug("Calculating highest digit for {} with current depth of {}", value, depth);
         }
         if (value < 10) {
-            return new Digit(value, DigitPosition.getByDepth(depth));
+            DigitPosition digitPosition = DigitPosition.getByDepth(depth);
+            return new Digit(value, digitPosition);
         }
         value = value / 10;
 

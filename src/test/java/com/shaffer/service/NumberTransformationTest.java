@@ -40,7 +40,7 @@ public class NumberTransformationTest {
     @Test
     public void test() {
         BigDecimal newValue = new BigDecimal(5);
-        newValue = newValue.scaleByPowerOfTen(7);
+        newValue = newValue.scaleByPowerOfTen(0);
         DecimalFormat df = new DecimalFormat("0");
         System.out.print(df.format(newValue.doubleValue()));
     }
