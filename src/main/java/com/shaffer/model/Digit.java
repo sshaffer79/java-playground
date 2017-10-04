@@ -13,6 +13,12 @@ public class Digit {
         this.digitPosition = digitPosition;
     }
 
+    public Digit(int value, DigitPosition digitPosition, Digit next) {
+        this.value = value;
+        this.digitPosition = digitPosition;
+        this.next = next;
+    }
+
     public int getValue() {
         return value;
     }
