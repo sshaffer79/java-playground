@@ -107,7 +107,7 @@ public class NumberTextByDigit {
                 numberTextBuilder.append(NumberText.fourteen);
                 break;
             case 5:
-                numberTextBuilder.append(NumberText.fifty);
+                numberTextBuilder.append(NumberText.fifteen);
                 break;
             case 6:
                 numberTextBuilder.append(NumberText.sixteen);
