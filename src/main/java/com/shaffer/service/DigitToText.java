@@ -23,6 +23,11 @@ public class DigitToText {
     private static final String AND = "and";
     private static final String SPACE = " ";
 
+    /**
+     * Transforms a Digit object into a String representation for the Digits stored
+     * @param digit The Digit being translated to text
+     * @return String represent a Digit and its following digits.
+     */
     public static String toString(Digit digit) {
         Digit currentDigit = digit;
         StringBuilder stringBuilder = new StringBuilder();
@@ -60,6 +65,10 @@ public class DigitToText {
         return stringBuilder.toString();
     }
 
+    /**
+     * Prints the the Digit representation to the log
+     * @param digit The digit to print to logs
+     */
     public static void printDigits(Digit digit) {
         Digit currentDigit = digit;
         StringBuilder stringBuilder = new StringBuilder();

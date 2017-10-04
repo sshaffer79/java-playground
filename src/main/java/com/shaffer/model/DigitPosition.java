@@ -1,5 +1,8 @@
 package com.shaffer.model;
 
+/**
+ * Representation of the different levels of scientific notation
+ */
 public enum DigitPosition {
     Single(0), Tenth(1), Hundreth(2), Thousandth(3), TenThousandth(4), HundredThousand(5),
     Millionth(6), TenMillionth(7), HundredMillionth(8), Billionth(9);

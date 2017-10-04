@@ -16,12 +16,18 @@ public class NumberTransformation {
         BigDecimal bigDecimalNumber = new BigDecimal(number).setScale(0);
 
         Digit rootDigit = getRootDigit(bigDecimalNumber);
+        DigitToText.printDigits(rootDigit);
 
         String textValue = DigitToText.toString(rootDigit);
 
         return textValue.substring(0, 1).toUpperCase() + textValue.substring(1);
     }
 
+    /**
+     * Creates a Digit object that is a breakdown of all the position of a given BigDecimal
+     * @param value A BigDecimal representing a int
+     * @return A Digit object with sub objects based off BigDecimal
+     */
     protected static Digit getRootDigit(BigDecimal value) {
         Digit rootDigit = null;
         Digit parentDigit = null;

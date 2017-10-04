@@ -1,5 +1,9 @@
 package com.shaffer.model;
 
+/**
+ * Representation of one digit of a number and its position in the number. Also contains what the next Digit will
+ * be if there is one
+ */
 public class Digit {
     private int value;
     private DigitPosition digitPosition;

@@ -5,7 +5,6 @@ import com.shaffer.model.DigitPosition;
 import org.junit.Test;
 
 import java.math.BigDecimal;
-import java.util.List;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.nullValue;
@@ -17,6 +16,14 @@ public class NumberTransformationTest {
         int value = 0;
         String text = NumberTransformation.getTextForNumber(value);
         assertThat(text, is("Zero"));
+    }
+
+
+    @Test
+    public void testFive() {
+        int value = 5;
+        String text = NumberTransformation.getTextForNumber(value);
+        assertThat(text, is("Five"));
     }
 
     @Test
@@ -52,49 +59,6 @@ public class NumberTransformationTest {
         int value = 50012307;
         String text = NumberTransformation.getTextForNumber(value);
         assertThat(text, is("Fifty million twelve thousand three hundred and seven"));
-    }
-
-    @Test
-    public void testGetDigitListBySingle() {
-        BigDecimal value = new BigDecimal(6).setScale(0);
-
-        List<Digit> digitList = NumberTransformation.getDigitList(value);
-
-        assertThat(digitList.size(), is(1));
-        assertThat(digitList.get(0).getValue(), is(6));
-        assertThat(digitList.get(0).getDigitPosition(), is(DigitPosition.Single));
-    }
-
-    @Test
-    public void testGetDigitListByThousand() {
-        BigDecimal value = new BigDecimal(2358).setScale(0);
-
-        List<Digit> digitList = NumberTransformation.getDigitList(value);
-
-        assertThat(digitList.size(), is(4));
-        assertThat(digitList.get(0).getValue(), is(2));
-        assertThat(digitList.get(0).getDigitPosition(), is(DigitPosition.Thousandth));
-        assertThat(digitList.get(1).getValue(), is(3));
-        assertThat(digitList.get(1).getDigitPosition(), is(DigitPosition.Hundreth));
-        assertThat(digitList.get(2).getValue(), is(5));
-        assertThat(digitList.get(2).getDigitPosition(), is(DigitPosition.Tenth));
-        assertThat(digitList.get(3).getValue(), is(8));
-        assertThat(digitList.get(3).getDigitPosition(), is(DigitPosition.Single));
-    }
-
-    @Test
-    public void testGetDigitListByThousandWithZeroIn() {
-        BigDecimal value = new BigDecimal(2308).setScale(0);
-
-        List<Digit> digitList = NumberTransformation.getDigitList(value);
-
-        assertThat(digitList.size(), is(3));
-        assertThat(digitList.get(0).getValue(), is(2));
-        assertThat(digitList.get(0).getDigitPosition(), is(DigitPosition.Thousandth));
-        assertThat(digitList.get(1).getValue(), is(3));
-        assertThat(digitList.get(1).getDigitPosition(), is(DigitPosition.Hundreth));
-        assertThat(digitList.get(2).getValue(), is(8));
-        assertThat(digitList.get(2).getDigitPosition(), is(DigitPosition.Single));
     }
 
     @Test
