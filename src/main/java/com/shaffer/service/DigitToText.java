@@ -41,7 +41,7 @@ public class DigitToText {
                     stringBuilder.append(AND).append(SPACE);
                 }
             }
-            if (NumberTextByDigit.isATenth(currentDigit)) {
+            if (NumberTextByDigit.isATeen(currentDigit)) {
                 currentDigit = currentDigit.getNext();
                 stringBuilder.append(NumberTextByDigit.getTeen(currentDigit));
             } else {

@@ -52,4 +52,33 @@ public class NumberTextByDigitTest {
 
         assertThat(text, is("fourteen"));
     }
+
+    @Test
+    public void testGetTeenWithTen() {
+        Digit digit = new Digit(1, DigitPosition.Tenth);
+
+        boolean value = NumberTextByDigit.isATeen(digit);
+
+        assertThat(value, is(false));
+    }
+
+    @Test
+    public void testGetTeenWithFifteen() {
+        Digit digit = new Digit(1, DigitPosition.Tenth,
+                new Digit(5, DigitPosition.Single));
+
+        boolean value = NumberTextByDigit.isATeen(digit);
+
+        assertThat(value, is(true));
+    }
+
+    @Test
+    public void testGetTeenWithThousand() {
+        Digit digit = new Digit(1, DigitPosition.Thousandth,
+                new Digit(5, DigitPosition.Single));
+
+        boolean value = NumberTextByDigit.isATeen(digit);
+
+        assertThat(value, is(false));
+    }
 }
