@@ -5,8 +5,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
 
 public class NumberTransformation {
     private static final Logger logger = LoggerFactory.getLogger(NumberTransformation.class);
@@ -24,35 +22,22 @@ public class NumberTransformation {
         return textValue.substring(0, 1).toUpperCase() + textValue.substring(1);
     }
 
-    protected static List<Digit> getDigitList(BigDecimal value) {
-        List<Digit> digitList = new ArrayList<>();
-
-        while (value.intValue() > 0) {
-            logger.debug("Number being worked on is currently " + value.toPlainString());
-            Digit digit = DigitCalculation.getHighestDigit(value.intValue());
-            digitList.add(digit);
-
-            BigDecimal digitalToSubtract = new BigDecimal(digit.getValue())
-                    .setScale(0)
-                    .scaleByPowerOfTen(digit.getDigitPosition().getDepth());
-            logger.debug("Subtracting {} from {} ", digitalToSubtract.toPlainString(), value.toPlainString());
-            value = value.subtract(digitalToSubtract);
-        }
-        return digitList;
-    }
-
     protected static Digit getRootDigit(BigDecimal value) {
         Digit rootDigit = null;
         Digit parentDigit = null;
 
         while (value.intValue() > 0) {
-            logger.debug("Number being worked on is currently " + value.toPlainString());
+            if (logger.isDebugEnabled()) {
+                logger.debug("Number being worked on is currently " + value.toPlainString());
+            }
             Digit currentDigit = DigitCalculation.getHighestDigit(value.intValue());
 
             BigDecimal digitalToSubtract = new BigDecimal(currentDigit.getValue())
                     .setScale(0)
                     .scaleByPowerOfTen(currentDigit.getDigitPosition().getDepth());
-            logger.debug("Subtracting {} from {} ", digitalToSubtract.toPlainString(), value.toPlainString());
+            if (logger.isDebugEnabled()) {
+                logger.debug("Subtracting {} from {} ", digitalToSubtract.toPlainString(), value.toPlainString());
+            }
             value = value.subtract(digitalToSubtract);
 
             if (rootDigit == null) {
