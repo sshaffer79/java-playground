@@ -32,11 +32,6 @@ public class DigitToText {
                 stringBuilder.append(SPACE);
             }
             if (previousDigit != null) {
-                if (previousDigit.getDigitPosition().ordinal() <= 5 && previousDigit.getDigitPosition().ordinal() >= 3
-                        && currentDigit.getDigitPosition().ordinal() < 3) {
-                    stringBuilder.append(NumberText.thousand).append(SPACE);
-                }
-
                 if (currentDigit.getDigitPosition().ordinal() < 2 && previousDigit.getDigitPosition().ordinal() >= 2) {
                     stringBuilder.append(AND).append(SPACE);
                 }
@@ -51,6 +46,12 @@ public class DigitToText {
                     currentDigit.getDigitPosition() == DigitPosition.HundredThousand ||
                     currentDigit.getDigitPosition() == DigitPosition.HundredMillionth) {
                 stringBuilder.append(SPACE).append(NumberText.hundred);
+            }
+
+            if (NumberTextByDigit.needsThousandText(currentDigit)) {
+                stringBuilder.append(SPACE).append(NumberText.thousand);
+            } else if (NumberTextByDigit.needsMillionText(currentDigit)) {
+                stringBuilder.append(SPACE).append(NumberText.million);
             }
 
             previousDigit = currentDigit;

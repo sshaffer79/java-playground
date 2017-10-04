@@ -81,4 +81,35 @@ public class NumberTextByDigitTest {
 
         assertThat(value, is(false));
     }
+
+    @Test
+    public void testNeedsThousandTextIsTrue() {
+        Digit digit = new Digit(1, DigitPosition.Thousandth);
+
+        boolean value = NumberTextByDigit.needsLargeNumberText(digit,
+                DigitPosition.Thousandth, DigitPosition.HundredThousand);
+
+        assertThat(value, is(true));
+    }
+
+    @Test
+    public void testNeedsThousandTextIsFalseAsHundred() {
+        Digit digit = new Digit(1, DigitPosition.Hundreth);
+
+        boolean value = NumberTextByDigit.needsLargeNumberText(digit,
+                DigitPosition.Thousandth, DigitPosition.HundredThousand);
+
+        assertThat(value, is(false));
+    }
+
+    @Test
+    public void testNeedsThousandTextIsFalseDueToMultipleThousandsDigits() {
+        Digit digit = new Digit(1, DigitPosition.HundredThousand,
+                new Digit(2, DigitPosition.Thousandth));
+
+        boolean value = NumberTextByDigit.needsLargeNumberText(digit,
+                DigitPosition.Thousandth, DigitPosition.HundredThousand);
+
+        assertThat(value, is(false));
+    }
 }

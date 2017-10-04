@@ -139,7 +139,22 @@ public class NumberTextByDigit {
         return false;
     }
 
-//    public NumberText getLargeNumberText(Digit digit) {
-//
-//    }
+    public static boolean needsMillionText(Digit digit) {
+        return needsLargeNumberText(digit, DigitPosition.Millionth, DigitPosition.HundredMillionth);
+    }
+
+    public static boolean needsThousandText(Digit digit) {
+        return needsLargeNumberText(digit, DigitPosition.Thousandth, DigitPosition.HundredThousand);
+    }
+
+    public static boolean needsLargeNumberText(Digit digit, DigitPosition lowerPosition, DigitPosition upperPosition) {
+        if (digit.getDigitPosition().ordinal() <= upperPosition.ordinal()
+                && digit.getDigitPosition().ordinal() >= lowerPosition.ordinal()) {
+            if (digit.getNext() == null
+                    || digit.getNext().getDigitPosition().ordinal() < lowerPosition.ordinal()) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
