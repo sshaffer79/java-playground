@@ -48,6 +48,13 @@ public class NumberTransformationTest {
     }
 
     @Test
+    public void testTensMillions() {
+        int value = 50012307;
+        String text = NumberTransformation.getTextForNumber(value);
+        assertThat(text, is("Fifty million twelve thousand three hundred and seven"));
+    }
+
+    @Test
     public void testGetDigitListBySingle() {
         BigDecimal value = new BigDecimal(6).setScale(0);
 
