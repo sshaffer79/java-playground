@@ -9,7 +9,6 @@ public class DigitCalculation {
     private static final Logger logger = LoggerFactory.getLogger(DigitCalculation.class);
 
     public static Digit getHighestDigit(int value) {
-        int depth = 0;
         return getHighestDigit(value, 0);
     }
 
