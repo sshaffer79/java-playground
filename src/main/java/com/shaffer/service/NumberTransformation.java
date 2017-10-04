@@ -17,13 +17,11 @@ public class NumberTransformation {
         }
         BigDecimal bigDecimalNumber = new BigDecimal(number).setScale(0);
 
-        List<Digit> digitList = getDigitList(bigDecimalNumber);
+        Digit rootDigit = getRootDigit(bigDecimalNumber);
 
-        for (Digit digit : digitList) {
-            logger.info(digit.toString());
-        }
+        String textValue = DigitToText.toString(rootDigit);
 
-        return null;
+        return textValue.substring(0, 1).toUpperCase() + textValue.substring(1);
     }
 
     protected static List<Digit> getDigitList(BigDecimal value) {

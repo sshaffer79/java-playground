@@ -27,10 +27,10 @@ public class NumberTransformationTest {
     }
 
     @Test
-    public void testEight5() {
+    public void testEightyFive() {
         int value = 85;
         String text = NumberTransformation.getTextForNumber(value);
-        assertThat(text, is("Eighty Five"));
+        assertThat(text, is("Eighty five"));
     }
 
     @Test
