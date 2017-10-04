@@ -128,4 +128,18 @@ public class NumberTextByDigit {
 
         return numberTextBuilder.toString();
     }
+
+    public static boolean isATenth(Digit digit) {
+        if (digit.getValue() == 1 && !positionsNotUsingTens.contains(digit.getDigitPosition())) {
+            if (digit.getNext() != null
+                    && digit.getNext().getDigitPosition().ordinal() == digit.getDigitPosition().ordinal() - 1) {
+               return true;
+            }
+        }
+        return false;
+    }
+
+//    public NumberText getLargeNumberText(Digit digit) {
+//
+//    }
 }

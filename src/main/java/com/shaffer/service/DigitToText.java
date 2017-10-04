@@ -41,14 +41,9 @@ public class DigitToText {
                     stringBuilder.append(AND).append(SPACE);
                 }
             }
-            if (currentDigit.getValue() == 1 && positionsUsingTens.contains(currentDigit.getDigitPosition())) {
-                if (currentDigit.getNext() != null
-                    && currentDigit.getNext().getDigitPosition().ordinal() == currentDigit.getDigitPosition().ordinal() - 1) {
-                    currentDigit = currentDigit.getNext();
-                    stringBuilder.append(NumberTextByDigit.getTeen(currentDigit));
-                } else {
-                    stringBuilder.append(NumberTextByDigit.get(currentDigit));
-                }
+            if (NumberTextByDigit.isATenth(currentDigit)) {
+                currentDigit = currentDigit.getNext();
+                stringBuilder.append(NumberTextByDigit.getTeen(currentDigit));
             } else {
                 stringBuilder.append(NumberTextByDigit.get(currentDigit));
             }

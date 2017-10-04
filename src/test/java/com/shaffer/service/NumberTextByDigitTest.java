@@ -36,21 +36,20 @@ public class NumberTextByDigitTest {
     }
 
     @Test
-    public void testTeen() {
-        Digit digit = new Digit(1, DigitPosition.Tenth);
-        digit.setNext(new Digit(4, DigitPosition.Single));
-
-        String text = NumberTextByDigit.get(digit);
-
-        assertThat(text, is("fourteen"));
-    }
-
-    @Test
     public void testEighty() {
         Digit digit = new Digit(8, DigitPosition.Tenth);
 
         String text = NumberTextByDigit.get(digit);
 
         assertThat(text, is("eighty"));
+    }
+
+    @Test
+    public void testGetTeen() {
+        Digit digit = new Digit(4, DigitPosition.Single);
+
+        String text = NumberTextByDigit.getTeen(digit);
+
+        assertThat(text, is("fourteen"));
     }
 }
