@@ -6,8 +6,19 @@ import com.shaffer.model.NumberText;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.Arrays;
+import java.util.List;
+
 public class DigitToText {
     private static final Logger logger = LoggerFactory.getLogger(DigitToText.class);
+
+    public static final List<DigitPosition> positionsUsingTens;
+
+    static {
+        positionsUsingTens = Arrays.asList(
+                DigitPosition.Tenth, DigitPosition.TenThousandth, DigitPosition.TenMillionth
+        );
+    }
 
     private static final String AND = "and";
     private static final String SPACE = " ";
@@ -30,12 +41,21 @@ public class DigitToText {
                     stringBuilder.append(AND).append(SPACE);
                 }
             }
-            stringBuilder.append(NumberTextByDigit.get(currentDigit));
+            if (currentDigit.getValue() == 1 && positionsUsingTens.contains(currentDigit.getDigitPosition())) {
+                if (currentDigit.getNext() != null
+                    && currentDigit.getNext().getDigitPosition().ordinal() == currentDigit.getDigitPosition().ordinal() - 1) {
+                    currentDigit = currentDigit.getNext();
+                    stringBuilder.append(NumberTextByDigit.getTeen(currentDigit));
+                } else {
+                    stringBuilder.append(NumberTextByDigit.get(currentDigit));
+                }
+            } else {
+                stringBuilder.append(NumberTextByDigit.get(currentDigit));
+            }
             if (currentDigit.getDigitPosition() == DigitPosition.Hundreth ||
                     currentDigit.getDigitPosition() == DigitPosition.HundredThousand ||
                     currentDigit.getDigitPosition() == DigitPosition.HundredMillionth) {
                 stringBuilder.append(SPACE).append(NumberText.hundred);
-
             }
 
             previousDigit = currentDigit;

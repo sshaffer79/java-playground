@@ -24,15 +24,15 @@ public class DigitToTextTest {
         assertThat(text, is("seven"));
     }
 
-//    @Test
-//    public void testTeen() {
-//        Digit digit = new Digit(1, DigitPosition.Tenth,
-//                new Digit(8, DigitPosition.Single));
-//
-//        String text = DigitToText.toString(digit);
-//
-//        assertThat(text, is("eighteen"));
-//    }
+    @Test
+    public void testTeen() {
+        Digit digit = new Digit(1, DigitPosition.Tenth,
+                new Digit(8, DigitPosition.Single));
+
+        String text = DigitToText.toString(digit);
+
+        assertThat(text, is("eighteen"));
+    }
 
     @Test
     public void testDoubleDigit() {
@@ -42,6 +42,35 @@ public class DigitToTextTest {
         String text = DigitToText.toString(digit);
 
         assertThat(text, is("eighty seven"));
+    }
+
+    @Test
+    public void testHundred() {
+        Digit digit = new Digit(1, DigitPosition.Hundreth);
+
+        String text = DigitToText.toString(digit);
+
+        assertThat(text, is("one hundred"));
+    }
+
+    @Test
+    public void testTenThousand() {
+        Digit digit = new Digit(1, DigitPosition.TenThousandth);
+
+        String text = DigitToText.toString(digit);
+
+        assertThat(text, is("ten thousand"));
+    }
+
+    @Test
+    public void testTenThousandAndTwentyThree() {
+        Digit digit = new Digit(1, DigitPosition.TenThousandth,
+                new Digit(2, DigitPosition.Tenth,
+                        new Digit(3, DigitPosition.Single)));
+
+        String text = DigitToText.toString(digit);
+
+        assertThat(text, is("ten thousand and twenty three"));
     }
 
     @Test

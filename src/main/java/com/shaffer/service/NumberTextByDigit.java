@@ -17,8 +17,8 @@ public class NumberTextByDigit {
                 DigitPosition.Millionth, DigitPosition.HundredMillionth,
                 DigitPosition.Billionth
         );
-
     }
+
     public static String get(Digit digit) {
         StringBuilder numberTextBuilder = new StringBuilder();
         if (positionsNotUsingTens.contains(digit.getDigitPosition())) {
@@ -57,13 +57,7 @@ public class NumberTextByDigit {
         } else {
             switch(digit.getValue()) {
                 case 1:
-                    if (digit.getNext() != null) {
-                        if (digit.getNext().getDigitPosition().ordinal() == digit.getDigitPosition().ordinal()-1) {
-                            numberTextBuilder.append("teenNum");
-                        }
-                    } else {
-                        numberTextBuilder.append(NumberText.ten);
-                    }
+                    numberTextBuilder.append(NumberText.ten);
                     break;
                 case 2:
                     numberTextBuilder.append(NumberText.twenty);
@@ -92,6 +86,44 @@ public class NumberTextByDigit {
                 default:
                     break;
             }
+        }
+
+        return numberTextBuilder.toString();
+    }
+
+    public static String getTeen(Digit digit) {
+        StringBuilder numberTextBuilder = new StringBuilder();
+        switch(digit.getValue()) {
+            case 1:
+                numberTextBuilder.append(NumberText.eleven);
+                break;
+            case 2:
+                numberTextBuilder.append(NumberText.twelve);
+                break;
+            case 3:
+                numberTextBuilder.append(NumberText.thirteen);
+                break;
+            case 4:
+                numberTextBuilder.append(NumberText.fourteen);
+                break;
+            case 5:
+                numberTextBuilder.append(NumberText.fifty);
+                break;
+            case 6:
+                numberTextBuilder.append(NumberText.sixteen);
+                break;
+            case 7:
+                numberTextBuilder.append(NumberText.seventeen);
+                break;
+            case 8:
+                numberTextBuilder.append(NumberText.eighteen);
+                break;
+            case 9:
+                numberTextBuilder.append(NumberText.nineteen);
+                break;
+            default:
+                numberTextBuilder.append(NumberText.ten);
+                break;
         }
 
         return numberTextBuilder.toString();

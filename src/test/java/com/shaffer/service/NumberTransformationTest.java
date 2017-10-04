@@ -136,17 +136,8 @@ public class NumberTransformationTest {
 
     @Test
     public void test() {
-        Digit digit = NumberTransformation.getRootDigit(new BigDecimal(713423534));
+        Digit digit = NumberTransformation.getRootDigit(new BigDecimal(4000));
 
-        System.out.println(digit.toString());
-
-        Digit currentDigit = digit;
-        StringBuilder stringBuilder = new StringBuilder();
-        while (currentDigit != null) {
-            stringBuilder.append(currentDigit.getValue()).append(" ");
-            currentDigit = currentDigit.getNext();
-        }
-        System.out.println(stringBuilder.toString());
-        System.out.println(digit.size());
+        DigitToText.printDigits(digit);
     }
 }
